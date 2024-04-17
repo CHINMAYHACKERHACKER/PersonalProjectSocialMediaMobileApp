@@ -21,7 +21,7 @@ const Login = (props) => {
             let loginResponse = await handleLogin(reqObj);
             if (loginResponse?.data?.login) {
                 alert(`${loginResponse?.data?.message}`);
-                navigation.navigate('home')
+                navigation.navigate('Bottomtabs')
             } else {
                 alert(`${loginResponse?.response?.data?.message}`);
             }

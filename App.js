@@ -12,8 +12,8 @@ const Tab = createBottomTabNavigator();
 
 function HomeTabs() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
+    <Tab.Navigator initialRouteName='home'>
+      <Tab.Screen name="home" component={Home} />
       <Tab.Screen name="sample" component={Samplepage} />
     </Tab.Navigator>
   );
