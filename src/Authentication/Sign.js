@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { handleSignup } from "../AxiosRequest/HandleAxiosRequest";
-import { Text, View, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, TextInput, TouchableOpacity,Modal } from "react-native";
 import signupStyle from "../css/SignCss";
 
 const Sign = (props) => {
@@ -9,10 +9,13 @@ const Sign = (props) => {
         mobileNumberOrEmail: "",
         password: ""
     })
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     const signIn = async () => {
         if (!userSignUpData.mobileNumberOrEmail || !userSignUpData.password) {
-            alert('Please enter both username and password.');
+            setModalMessage("Please enter both username and password.");
+            setModalVisible(true);
         } else {
             let reqObj = {
                 mobileNumberOrEmail: userSignUpData.mobileNumberOrEmail,
@@ -20,12 +23,17 @@ const Sign = (props) => {
             }
             let signUpResponse = await handleSignup(reqObj);
             if (signUpResponse?.status === 200 && signUpResponse?.data?.signUp) {
-                alert(`${signUpResponse?.data?.message}`);
+                setModalMessage(`${signUpResponse?.data?.message}`);
+                setModalVisible(true);
+                setTimeout(() => {
+                    navigation.navigate('login');
+                }, 2000);
             } else {
-                alert(`${signUpResponse?.data?.message}`);
+                setModalMessage(`${signUpResponse?.data?.message}`);
+                setModalVisible(true);
             }
         }
-    };
+    }
 
     return <>
         <View>
@@ -46,6 +54,21 @@ const Sign = (props) => {
                 </View>
             </View>
         </View>
+        <Modal
+            transparent={true}
+            visible={modalVisible}
+            animationType="fade"
+            onRequestClose={() => setModalVisible(false)}
+        >
+            <View style={signupStyle.modalContainer}>
+                <View style={signupStyle.modal}>
+                    <Text style={signupStyle.modalText}>{modalMessage}</Text>
+                    <TouchableOpacity style={signupStyle.modalButton} activeOpacity={0.9} onPress={() => setModalVisible(false)}>
+                    <Text style={signupStyle.buttonText}>Close</Text>
+                </TouchableOpacity>
+                </View>
+            </View>
+        </Modal>
     </>
 }
 

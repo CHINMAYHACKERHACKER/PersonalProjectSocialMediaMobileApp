@@ -51,6 +51,33 @@ const loginStyle = StyleSheet.create({
     signUpText: {
         fontFamily: "Poppins-Bold",
         color: "#007BFF",
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modal: {
+        width: "80%",
+        padding: 20,
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        alignItems: "center",
+    },
+    modalText: {
+        fontSize: 16,
+        marginBottom: 20,
+        textAlign: "center",
+    },
+    modalButton: {
+        backgroundColor: "#000",
+        borderRadius: 30,
+        paddingVertical: 15,
+        paddingHorizontal: 30,
+        alignItems: "center",
+        width: 105,
+        alignSelf: "center"
     }
 });
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { handleLogin } from "../AxiosRequest/HandleAxiosRequest";
-import { Text, View, TextInput, TouchableOpacity, Button } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Button, Modal } from "react-native";
 import loginStyle from "../css/LoginCss";
 
 const Login = (props) => {
@@ -9,10 +9,13 @@ const Login = (props) => {
         mobileNumberOrEmail: "",
         password: ""
     })
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     const logIn = async () => {
         if (!userLoginData.mobileNumberOrEmail || !userLoginData.password) {
-            alert('Please enter both username and password.');
+            setModalMessage("Please enter both username and password.");
+            setModalVisible(true);
         } else {
             let reqObj = {
                 mobileNumberOrEmail: userLoginData.mobileNumberOrEmail,
@@ -20,10 +23,12 @@ const Login = (props) => {
             }
             let loginResponse = await handleLogin(reqObj);
             if (loginResponse?.data?.login) {
-                alert(`${loginResponse?.data?.message}`);
+                // setModalMessage(`${loginResponse?.data?.message}`);
+                // setModalVisible(true);
                 navigation.navigate('Bottomtabs')
             } else {
-                alert(`${loginResponse?.response?.data?.message}`);
+                setModalMessage(`${loginResponse?.data?.message}`);
+                setModalVisible(true);
             }
         }
     };
@@ -46,6 +51,21 @@ const Login = (props) => {
                 </View>
             </View>
         </View>
+        <Modal
+            transparent={true}
+            visible={modalVisible}
+            animationType="fade"
+            onRequestClose={() => setModalVisible(false)}
+        >
+            <View style={loginStyle.modalContainer}>
+                <View style={loginStyle.modal}>
+                    <Text style={loginStyle.modalText}>{modalMessage}</Text>
+                    <TouchableOpacity style={loginStyle.modalButton} activeOpacity={0.9} onPress={() => setModalVisible(false)}>
+                    <Text style={loginStyle.buttonText}>Close</Text>
+                </TouchableOpacity>
+                </View>
+            </View>
+        </Modal>
     </>
 }
 export default Login;

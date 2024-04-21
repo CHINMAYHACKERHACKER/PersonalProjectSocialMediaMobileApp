@@ -103,9 +103,20 @@ axios.interceptors.response.use(
         }
         return response;
     },
-    (error) => {
-        // Handle response error
-        return Promise.reject(error);
+    async (error) => {
+        if (error.response && error.response.status === 401) {
+            console.log('Unauthorized request, status code 401.');
+            await AsyncStorage.removeItem('accessToken');
+
+            return {
+                data: error.response.data
+            };
+        }
+        else if (error.response && error.response.status === 500) {
+            return {
+                data: error.response.data
+            };
+        }
     }
 );
 

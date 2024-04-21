@@ -16,17 +16,22 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.BookMate"
+      "bundleIdentifier": "com.Bookmateversion3.Bookmateversion3"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.BookMate"
+      "package": "com.Bookmateversion3.Bookmateversion3"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "12038aee-5533-4904-b023-b548fd6b732e"
+      }
     }
-  }
+  } 
 }
