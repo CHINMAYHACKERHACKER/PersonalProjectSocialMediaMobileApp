@@ -41,6 +41,23 @@ const axiosRequestGet = async ({ method, url }) => {
     }
 };
 
+
+const axiosRequestUploadPost = async ({ method, url, data }) => {
+    try {
+        const response = await axios({
+            method: method,
+            url: url,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            data: data ? data : null,
+        });
+        return response;
+    } catch (error) {
+        console.error('Error in HttpRequest function:', error.message);
+    }
+};
+
 const getAccessToken = async () => {
     try {
         const accessToken = await AsyncStorage.getItem('accessToken');
@@ -123,4 +140,6 @@ axios.interceptors.response.use(
 export {
     axiosRequestPost,
     axiosRequestGet,
+    getAccessToken,
+    axiosRequestUploadPost
 }

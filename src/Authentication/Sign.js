@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { handleSignup } from "../AxiosRequest/HandleAxiosRequest";
-import { Text, View, TextInput, TouchableOpacity,Modal } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, Modal, Pressable } from "react-native";
+import { FontAwesome5 } from '@expo/vector-icons';
 import signupStyle from "../css/SignCss";
 
 const Sign = (props) => {
@@ -11,6 +12,7 @@ const Sign = (props) => {
     })
     const [modalVisible, setModalVisible] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const signIn = async () => {
         if (!userSignUpData.mobileNumberOrEmail || !userSignUpData.password) {
@@ -39,10 +41,10 @@ const Sign = (props) => {
         <View>
             <Text style={signupStyle.loginText}>Signup</Text>
             <View style={signupStyle.customPage}>
-                <TextInput style={signupStyle.inputWrapper} placeholder="Mobile or Email" onChangeText={(text) => setUserSignUpData({ ...userSignUpData, mobileNumberOrEmail: text })} />
+                <TextInput style={signupStyle.inputWrapper} placeholder="username" onChangeText={(text) => setUserSignUpData({ ...userSignUpData, mobileNumberOrEmail: text })} />
             </View>
             <View style={signupStyle.customPage}>
-                <TextInput style={signupStyle.inputWrapper} placeholder="Password" onChangeText={(text) => setUserSignUpData({ ...userSignUpData, password: text })} />
+                <TextInput style={signupStyle.inputWrapper} placeholder="password" onChangeText={(text) => setUserSignUpData({ ...userSignUpData, password: text })} secureTextEntry={showPassword} />
                 <TouchableOpacity style={signupStyle.loginButton} activeOpacity={0.9} onPress={signIn}>
                     <Text style={signupStyle.buttonText}>Signup</Text>
                 </TouchableOpacity>
@@ -64,8 +66,8 @@ const Sign = (props) => {
                 <View style={signupStyle.modal}>
                     <Text style={signupStyle.modalText}>{modalMessage}</Text>
                     <TouchableOpacity style={signupStyle.modalButton} activeOpacity={0.9} onPress={() => setModalVisible(false)}>
-                    <Text style={signupStyle.buttonText}>Close</Text>
-                </TouchableOpacity>
+                        <Text style={signupStyle.buttonText}>Close</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Modal>

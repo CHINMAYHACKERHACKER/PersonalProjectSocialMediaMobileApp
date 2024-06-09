@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { handleLogin } from "../AxiosRequest/HandleAxiosRequest";
 import { Text, View, TextInput, TouchableOpacity, Button, Modal } from "react-native";
 import loginStyle from "../css/LoginCss";
@@ -23,23 +23,21 @@ const Login = (props) => {
             }
             let loginResponse = await handleLogin(reqObj);
             if (loginResponse?.data?.login) {
-                // setModalMessage(`${loginResponse?.data?.message}`);
-                // setModalVisible(true);
-                navigation.navigate('Bottomtabs')
+                navigation.replace('Bottomtabs');
             } else {
                 setModalMessage(`${loginResponse?.data?.message}`);
                 setModalVisible(true);
             }
         }
-    };
+    }
     return <>
         <View>
             <Text style={loginStyle.loginText}>Login</Text>
             <View style={loginStyle.customPage}>
-                <TextInput style={loginStyle.inputWrapper} placeholder="Mobile or Email" onChangeText={(text) => setUserLoginData({ ...userLoginData, mobileNumberOrEmail: text })} />
+                <TextInput style={loginStyle.inputWrapper} placeholder="username" onChangeText={(text) => setUserLoginData({ ...userLoginData, mobileNumberOrEmail: text })} />
             </View>
             <View style={loginStyle.customPage}>
-                <TextInput style={loginStyle.inputWrapper} placeholder="Password" onChangeText={(text) => setUserLoginData({ ...userLoginData, password: text })} />
+                <TextInput style={loginStyle.inputWrapper} placeholder="password" onChangeText={(text) => setUserLoginData({ ...userLoginData, password: text })} secureTextEntry={true}/>
                 <TouchableOpacity style={loginStyle.loginButton} activeOpacity={0.9} onPress={logIn}>
                     <Text style={loginStyle.buttonText}>Login</Text>
                 </TouchableOpacity>
@@ -61,8 +59,8 @@ const Login = (props) => {
                 <View style={loginStyle.modal}>
                     <Text style={loginStyle.modalText}>{modalMessage}</Text>
                     <TouchableOpacity style={loginStyle.modalButton} activeOpacity={0.9} onPress={() => setModalVisible(false)}>
-                    <Text style={loginStyle.buttonText}>Close</Text>
-                </TouchableOpacity>
+                        <Text style={loginStyle.buttonText}>Close</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Modal>

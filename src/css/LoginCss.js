@@ -78,7 +78,15 @@ const loginStyle = StyleSheet.create({
         alignItems: "center",
         width: 105,
         alignSelf: "center"
-    }
+    },
+    btn: {
+        borderRadius: 5,
+        backgroundColor: 'orange',
+        height: 30,
+        width: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }
 });
 
 export default loginStyle;

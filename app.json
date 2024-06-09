@@ -16,14 +16,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.Bookmateversion3.Bookmateversion3"
+      "bundleIdentifier": "com.Bookmateversion5.Bookmateversion5"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.Bookmateversion3.Bookmateversion3"
+      "package": "com.Bookmateversion5.Bookmateversion5"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,6 +32,9 @@
       "eas": {
         "projectId": "12038aee-5533-4904-b023-b548fd6b732e"
       }
-    }
-  } 
+    },
+    "plugins": [
+      "expo-document-picker"
+    ]
+  }
 }
