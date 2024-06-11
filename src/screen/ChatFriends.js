@@ -79,6 +79,10 @@ const ChatFriends = () => {
         let unFriendRes = await unFriend({ userId, unFriendId });
     }
 
+    const chatUser = (reciverId, reciverImage, reciverName) => {
+        navigation.navigate('userChat', { reciverId: reciverId, reciverImage: reciverImage, reciverName: reciverName });
+    }
+
     return (
         <View style={chatFriendStyle.ScreenBackground}>
             <View style={chatFriendStyle.header}>
@@ -110,7 +114,7 @@ const ChatFriends = () => {
                 data={filteredFriends.length > 0 || searchQuery.length > 0 ? filteredFriends : chatUserFriendsList}
                 renderItem={({ item }) => (
                     <>
-                        <Pressable style={chatFriendStyle.userContainer}>
+                        <Pressable style={chatFriendStyle.userContainer} onPress={() => chatUser(item?._id, item?.Image, item?.email_mobile_number)}>
                             <View style={chatFriendStyle.imageContainer}>
                                 {
                                     item?.Image ? (

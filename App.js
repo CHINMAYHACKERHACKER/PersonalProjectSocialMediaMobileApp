@@ -18,6 +18,7 @@ import { Octicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import ChatFriends from './src/screen/ChatFriends';
 import { Ionicons } from '@expo/vector-icons';
+import Chat from './src/screen/Chat';
 
 let stackNavigation = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -118,8 +119,9 @@ export default function App() {
             animation: "fade"
           }} />
           <stackNavigation.Screen name="Friend Requests" component={FriendRequestAccept} options={{
-            animation: "fade",
+            animation: "fade"
           }} />
+          <stackNavigation.Screen name="userChat" component={Chat} />
         </stackNavigation.Navigator>
       </NavigationContainer>
     </UserContext>
